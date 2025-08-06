@@ -1,0 +1,12 @@
+module lfsr(
+    input clk,
+    input reset,
+    output reg [7:0] out
+);
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            out <= 8'h1;
+        else
+            out <= {out[6:0], out[7] ^ out[5]}; // Tap at bit 7 and 5
+    end
+endmodule
